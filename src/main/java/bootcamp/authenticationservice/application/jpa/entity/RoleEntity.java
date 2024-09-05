@@ -15,11 +15,6 @@ public class RoleEntity {
     @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<UserEntity> users;
 
-    public RoleEntity(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
     public RoleEntity() {
 
     }
