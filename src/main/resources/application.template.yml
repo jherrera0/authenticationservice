@@ -1,0 +1,23 @@
+
+server:
+  port: {$PORT}
+
+spring:
+  datasource:
+    url: {$DATABASE_URL}
+    username: {$DATABASE_USERNAME}
+    password: {$DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+app-description: "stock service"
+app-version: "1.0.0"
+app-key-token: "User-Key-Token"
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /category/swagger-ui.html
+    enabled: true
