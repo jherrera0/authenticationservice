@@ -5,10 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class AuthenticationserviceApplication {
+public class AuthenticationServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationserviceApplication.class, args);
+		SpringApplication.run(AuthenticationServiceApplication.class, args);
 	}
 
 	private PasswordEncoder passwordEncoder;

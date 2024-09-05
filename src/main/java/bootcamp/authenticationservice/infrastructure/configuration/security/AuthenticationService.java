@@ -3,7 +3,6 @@ package bootcamp.authenticationservice.infrastructure.configuration.security;
 import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;
 import bootcamp.authenticationservice.application.http.dto.RegisterRequest;
-import bootcamp.authenticationservice.application.jpa.entity.RoleEntity;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;

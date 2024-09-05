@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationRestController {
 
     private final AuthenticationService authenticationService;
-    private final PasswordEncoder passwordEncoder;
     @PreAuthorize("permitAll()")
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthRequest authRequest) {
