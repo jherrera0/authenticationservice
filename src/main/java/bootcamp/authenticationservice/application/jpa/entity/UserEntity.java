@@ -25,7 +25,7 @@ public class UserEntity implements UserDetails {
     private String password;
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private RoleEntity role;
 
     @Override

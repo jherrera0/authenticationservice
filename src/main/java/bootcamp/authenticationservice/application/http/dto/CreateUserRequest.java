@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class CreateUserRequest {
     private String name;
     private String lastName;
     private String password;

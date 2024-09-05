@@ -12,7 +12,7 @@ public class RoleEntity {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<UserEntity> users;
 
     public RoleEntity(String name, String description) {
