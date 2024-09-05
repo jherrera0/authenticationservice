@@ -1,5 +1,8 @@
 package bootcamp.authenticationservice.application.http.dto;
 
+import lombok.Data;
+
+@Data
 public class AuthRequest {
     private String username;
     private String password;
@@ -10,11 +13,4 @@ public class AuthRequest {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
 }
