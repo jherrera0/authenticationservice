@@ -1,4 +1,4 @@
-package bootcamp.authenticationservice.application.http.controller;
+package bootcamp.authenticationservice.infrastructure.controller;
 
 import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;

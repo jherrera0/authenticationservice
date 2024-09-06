@@ -9,7 +9,7 @@ import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
 public class UserCase implements IUserServicePort {
     private final IUserPersistencePort userPersistencePort;
 
-    public UserCase(IUserPersistencePort userPersistencePort, IRolePersistencePort rolePersistencePort) {
+    public UserCase(IUserPersistencePort userPersistencePort) {
         this.userPersistencePort = userPersistencePort;
     }
 

@@ -5,6 +5,7 @@ import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
 import bootcamp.authenticationservice.domain.exception.UserDocumentAlreadyExistsException;
+import bootcamp.authenticationservice.domain.exception.UserEmailAlreadyExistException;
 import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
 import bootcamp.authenticationservice.domain.model.User;
@@ -32,6 +33,7 @@ public class GeneralMethods {
         validateDocument(userRepository,createUserRequest.getDocument());
         validAge(createUserRequest.getBirthDate());
         validatePhone(createUserRequest.getPhone());
+        validateEmail(userRepository,createUserRequest.getEmail());
     }
 
     private static void validateDocument(IUserRepository userRepository, String document) {
@@ -52,6 +54,15 @@ public class GeneralMethods {
             throw new UserIllegalPhoneFormatException();
         }
     }
+
+    private static void validateEmail(IUserRepository userRepository,String email) {
+        if(userRepository.findByEmail(email).isPresent()){
+            throw new UserEmailAlreadyExistException();
+        }
+
+    }
+
+
     private GeneralMethods(){
     }
 }
