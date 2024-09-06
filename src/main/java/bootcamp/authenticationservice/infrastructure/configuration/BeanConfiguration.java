@@ -32,9 +32,6 @@ public class BeanConfiguration {
     public IRolePersistencePort rolePersistencePort(){
         return new RoleJpaAdapter(roleRepository, roleEntityMapper);
     }
-    public IUserServicePort userServicePort(){
-        return new UserCase(userPersistencePort(), rolePersistencePort());
-    }
 
     @Bean
     public IRoleServicePort roleServicePort(){

@@ -16,7 +16,7 @@ public class UserCase implements IUserServicePort {
 
     @Override
     public void createUser(User user) {
-       if(userPersistencePort.getUserByEmail(user.getEmail()) == new User()){
+       if(userPersistencePort.getUserByEmail(user.getEmail()).equals(new User())){
            throw new UserEmailNotFoundException();
        }
        userPersistencePort.createUser(user);

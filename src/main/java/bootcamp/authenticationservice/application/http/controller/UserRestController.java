@@ -2,7 +2,6 @@ package bootcamp.authenticationservice.application.http.controller;
 
 import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
 import bootcamp.authenticationservice.application.http.mapper.ICreateUserRequestMapper;
-import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
 import bootcamp.authenticationservice.domain.model.User;
