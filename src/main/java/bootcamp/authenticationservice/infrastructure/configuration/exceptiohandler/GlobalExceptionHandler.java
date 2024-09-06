@@ -1,6 +1,7 @@
 package bootcamp.authenticationservice.infrastructure.configuration.exceptiohandler;
 
 import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
+import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
 import bootcamp.authenticationservice.until.UserDocumentAlreadyExistsException;
 import org.springframework.http.HttpHeaders;
@@ -32,6 +33,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(UserUnderAgeException.class)
     public ResponseEntity<Object> handleUserUnderAgeException(UserUnderAgeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UserIllegalPhoneFormatException.class)
+    public ResponseEntity<Object> handleUserIllegalPhoneFormatException(UserIllegalPhoneFormatException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 

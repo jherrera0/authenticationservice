@@ -6,9 +6,7 @@ public class ExceptionConst {
     public static final String USER_DOCUMENT_ALREADY_EXISTS = "User with this document already exists";
     public static final String USER_BIRTH_DATE_INVALID = "User is under legal age";
 
-    public static final Integer USER_PHONE_MAX_LENGTH = 13;
-    public static final Integer USER_PHONE_MIN_LENGTH = 10;
-
+    public static final String USER_PHONE_REGEX = "^[+]?[0-9]{1,12}$";
     private ExceptionConst() {
     }
 }

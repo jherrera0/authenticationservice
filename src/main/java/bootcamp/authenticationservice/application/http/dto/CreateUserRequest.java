@@ -35,8 +35,6 @@ public class CreateUserRequest {
     @NotNull
     @NotBlank
     @NotEmpty
-    @Min(ExceptionConst.USER_PHONE_MIN_LENGTH)
-    @Max( ExceptionConst.USER_PHONE_MAX_LENGTH)
     private String phone;
 
     @NotNull

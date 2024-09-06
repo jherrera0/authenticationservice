@@ -29,6 +29,7 @@ public class GeneralMethods {
     public static void validateUser(IUserRepository userRepository,CreateUserRequest createUserRequest) {
         validateDocument(userRepository,createUserRequest.getDocument());
         validAge(createUserRequest.getBirthDate());
+        validatePhone(createUserRequest.getPhone());
     }
 
     private static void validateDocument(IUserRepository userRepository, String document) {
@@ -40,6 +41,13 @@ public class GeneralMethods {
     private static void validAge(LocalDate birthDate) {
         if(birthDate.plusYears(18).isAfter(LocalDate.now())){
             throw new UserUnderAgeException();
+        }
+    }
+
+    private static void validatePhone(String phone) {
+        Pattern pattern = Pattern.compile(ExceptionConst.USER_PHONE_REGEX);
+        if (!pattern.matcher(phone).matches()) {
+            throw new UserIllegalPhoneFormatException();
         }
     }
     private GeneralMethods(){
