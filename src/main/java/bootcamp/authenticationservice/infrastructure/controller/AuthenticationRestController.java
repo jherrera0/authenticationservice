@@ -2,7 +2,6 @@ package bootcamp.authenticationservice.infrastructure.controller;
 
 import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;
-import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
 import bootcamp.authenticationservice.infrastructure.configuration.security.AuthenticationService;
 import bootcamp.authenticationservice.until.ConstantsRestController;
 import bootcamp.authenticationservice.until.DocumentationConst;

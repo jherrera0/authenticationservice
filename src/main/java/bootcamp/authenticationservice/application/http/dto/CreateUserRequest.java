@@ -1,6 +1,5 @@
 package bootcamp.authenticationservice.application.http.dto;
 
-import bootcamp.authenticationservice.until.ExceptionConst;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
