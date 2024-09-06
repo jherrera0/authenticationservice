@@ -7,6 +7,7 @@ import bootcamp.authenticationservice.application.jpa.repository.IUserRepository
 import bootcamp.authenticationservice.domain.exception.UserDocumentAlreadyExistsException;
 import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
+import bootcamp.authenticationservice.domain.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
@@ -14,17 +15,17 @@ import java.util.regex.Pattern;
 
 public class GeneralMethods {
 
-    public static UserEntity createUser(IRoleRepository roleRepository, PasswordEncoder passwordEncoder, CreateUserRequest createUserRequest, String role) {
-        UserEntity user = new UserEntity();
-        user.setName(createUserRequest.getName());
-        user.setLastName(createUserRequest.getLastName());
-        user.setDocument(createUserRequest.getDocument());
-        user.setPhone(createUserRequest.getPhone());
-        user.setBirthDate(createUserRequest.getBirthDate());
-        user.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
-        user.setEmail(createUserRequest.getEmail());
-        user.setRole(roleRepository.findByName(role).orElseThrow());
-        return user;
+    public static UserEntity createUser(IRoleRepository roleRepository, PasswordEncoder passwordEncoder, User createUserRequest, String role) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setName(createUserRequest.getName());
+        userEntity.setLastName(createUserRequest.getLastName());
+        userEntity.setDocument(createUserRequest.getDocument());
+        userEntity.setPhone(createUserRequest.getPhone());
+        userEntity.setBirthDate(createUserRequest.getBirthDate());
+        userEntity.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
+        userEntity.setEmail(createUserRequest.getEmail());
+        userEntity.setRole(roleRepository.findByName(role).orElseThrow());
+        return userEntity;
     }
 
     public static void validateUser(IUserRepository userRepository,CreateUserRequest createUserRequest) {

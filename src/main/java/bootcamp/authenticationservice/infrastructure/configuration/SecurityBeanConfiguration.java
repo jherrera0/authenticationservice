@@ -1,4 +1,4 @@
-package bootcamp.authenticationservice.infrastructure.configuration.security;
+package bootcamp.authenticationservice.infrastructure.configuration;
 
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
 import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;

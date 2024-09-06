@@ -1,9 +1,11 @@
-package bootcamp.authenticationservice.infrastructure.controller;
+package bootcamp.authenticationservice.application.http.controller;
 
 import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
+import bootcamp.authenticationservice.application.http.mapper.ICreateUserRequestMapper;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
+import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.until.ConstantsRestController;
 import bootcamp.authenticationservice.until.DocumentationConst;
 import bootcamp.authenticationservice.until.EntityConst;
@@ -28,6 +30,7 @@ public class UserRestController {
     private final IUserRepository userRepository;
     private final IRoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ICreateUserRequestMapper createUserRequestMapper;
 
     @Operation(summary = DocumentationConst.USER_CONTROLLER_CREATE_WAREHOUSE_DESCRIPTION)
     @ApiResponses(value = {
@@ -37,10 +40,9 @@ public class UserRestController {
     @PostMapping(ConstantsRestController.RUTE_CREATE_AUX_WAREHOUSE)
     @PreAuthorize(ConstantsRestController.HAS_ROLE_ADMIN)
     public void createAssWarehouse(@Valid @RequestBody CreateUserRequest createUserRequest) {
-        UserEntity user = GeneralMethods.createUser(roleRepository,passwordEncoder, createUserRequest,EntityConst.WAREHOUSE_ROLE);
         GeneralMethods.validateUser(userRepository,createUserRequest);
-        userRepository.save(user);
-
+        User user = createUserRequestMapper.ToUser(createUserRequest);
+        userRepository.save( GeneralMethods.createUser(roleRepository,passwordEncoder, user,EntityConst.WAREHOUSE_ROLE));
     }
 
 }
