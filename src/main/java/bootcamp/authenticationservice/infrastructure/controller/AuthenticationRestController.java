@@ -2,6 +2,7 @@ package bootcamp.authenticationservice.infrastructure.controller;
 
 import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;
+import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
 import bootcamp.authenticationservice.infrastructure.configuration.security.AuthenticationService;
 import bootcamp.authenticationservice.until.ConstantsRestController;
 import bootcamp.authenticationservice.until.DocumentationConst;
@@ -36,11 +37,4 @@ public class AuthenticationRestController {
         AuthResponse authResponse = authenticationService.login(authRequest);
         return ResponseEntity.ok(authResponse);
     }
-    @PreAuthorize("permitAll()")
-    @PostMapping("/register")
-    public ResponseEntity<AuthResponse> register(@Valid @RequestBody CreateUserRequest registerRequest) {
-        AuthResponse authResponse = authenticationService.register(registerRequest);
-        return ResponseEntity.ok(authResponse);
-    }
-
 }

@@ -38,6 +38,7 @@ public class UserRestController {
     @PreAuthorize(ConstantsRestController.HAS_ROLE_ADMIN)
     public void createAssWarehouse(@Valid @RequestBody CreateUserRequest createUserRequest) {
         UserEntity user = GeneralMethods.createUser(roleRepository,passwordEncoder, createUserRequest,EntityConst.WAREHOUSE_ROLE);
+        GeneralMethods.validateUser(userRepository,createUserRequest);
         userRepository.save(user);
 
     }

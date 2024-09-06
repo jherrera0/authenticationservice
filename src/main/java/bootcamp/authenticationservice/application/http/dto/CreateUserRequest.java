@@ -1,5 +1,6 @@
 package bootcamp.authenticationservice.application.http.dto;
 
+import bootcamp.authenticationservice.until.ExceptionConst;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,29 +11,38 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateUserRequest {
+
     @NotNull
     @NotBlank
     @NotEmpty
     private String name;
+
     @NotNull
     @NotBlank
     @NotEmpty
     private String lastName;
+
     @NotNull
     @NotBlank
     @NotEmpty
     private String password;
+
     @NotNull
     @NotBlank
     @NotEmpty
     private String document;
+
     @NotNull
     @NotBlank
     @NotEmpty
+    @Min(ExceptionConst.USER_PHONE_MIN_LENGTH)
+    @Max( ExceptionConst.USER_PHONE_MAX_LENGTH)
     private String phone;
+
     @NotNull
     @Email
     private String email;
+
     @NotNull
     @Past
     private LocalDate birthDate;
