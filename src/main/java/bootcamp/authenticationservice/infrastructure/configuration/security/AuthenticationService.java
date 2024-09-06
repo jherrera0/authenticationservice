@@ -29,7 +29,6 @@ public class AuthenticationService {
         authenticationManager.authenticate(authenticationToken);
 
         UserEntity user = userRepository.findByEmail(authRequest.getUsername()).orElseThrow(UserEmailNotFoundException::new);
-
         String token = jwtService.generateToken(user,generateExtraClaims(user));
         return new AuthResponse(token);
     }
