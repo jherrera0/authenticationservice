@@ -4,6 +4,7 @@ import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
+import bootcamp.authenticationservice.domain.exception.UserDocumentAlreadyExistsException;
 import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,7 @@ public class GeneralMethods {
         user.setBirthDate(createUserRequest.getBirthDate());
         user.setPassword(passwordEncoder.encode(createUserRequest.getPassword()));
         user.setEmail(createUserRequest.getEmail());
-        user.setRole(roleRepository.findByName(role).get());
+        user.setRole(roleRepository.findByName(role).orElseThrow());
         return user;
     }
 

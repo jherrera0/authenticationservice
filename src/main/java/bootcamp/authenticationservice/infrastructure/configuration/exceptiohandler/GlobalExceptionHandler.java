@@ -3,7 +3,7 @@ package bootcamp.authenticationservice.infrastructure.configuration.exceptiohand
 import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
 import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
-import bootcamp.authenticationservice.until.UserDocumentAlreadyExistsException;
+import bootcamp.authenticationservice.domain.exception.UserDocumentAlreadyExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;

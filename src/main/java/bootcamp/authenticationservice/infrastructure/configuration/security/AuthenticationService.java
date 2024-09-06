@@ -4,6 +4,7 @@ import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
+import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,7 +28,7 @@ public class AuthenticationService {
                 authRequest.getUsername(), authRequest.getPassword());
         authenticationManager.authenticate(authenticationToken);
 
-        UserEntity user = userRepository.findByEmail(authRequest.getUsername()).get();
+        UserEntity user = userRepository.findByEmail(authRequest.getUsername()).orElseThrow(UserEmailNotFoundException::new);
 
         String token = jwtService.generateToken(user,generateExtraClaims(user));
         return new AuthResponse(token);

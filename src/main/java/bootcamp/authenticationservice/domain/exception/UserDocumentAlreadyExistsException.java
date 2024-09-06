@@ -1,4 +1,6 @@
-package bootcamp.authenticationservice.until;
+package bootcamp.authenticationservice.domain.exception;
+
+import bootcamp.authenticationservice.until.ExceptionConst;
 
 public class UserDocumentAlreadyExistsException extends RuntimeException {
     public UserDocumentAlreadyExistsException() {

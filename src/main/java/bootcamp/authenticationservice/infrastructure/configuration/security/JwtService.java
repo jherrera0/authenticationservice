@@ -20,7 +20,7 @@ import java.util.Map;
 public class JwtService {
 
     @Value("${app-description}")
-    private String SECRET_KEY;
+    private String secretKey;
     public String generateToken(UserEntity user, Map<String, Object> extraClaims) {
         Date issuedAt = new Date(System.currentTimeMillis());
         Date expiration = new Date(issuedAt.getTime() + JwtConst.EXPIRATION_TIME);
@@ -35,7 +35,7 @@ public class JwtService {
     }
 
     private Key generateKey() {
-        return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
     public String extractUsername(String jwt) {
