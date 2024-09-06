@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.Map;
 
 @Service
+
 public class JwtService {
+
     @Value("${app-description}")
     private String SECRET_KEY;
     public String generateToken(UserEntity user, Map<String, Object> extraClaims) {

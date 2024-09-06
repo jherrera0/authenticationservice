@@ -17,6 +17,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 @Component
 @RequiredArgsConstructor
+
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final IUserRepository userRepository;
@@ -27,7 +28,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request,response);
         return;
     }
-    String jwt = authorizationHeader.split(" ")[1];
+    String jwt = authorizationHeader.split(JwtConst.SPLITERSTRING)[1];
     String username = jwtService.extractUsername(jwt);
     UserEntity user = userRepository.findByEmail(username).get();
     UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,null,user.getAuthorities());

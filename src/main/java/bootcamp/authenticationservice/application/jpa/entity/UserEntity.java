@@ -1,5 +1,6 @@
 package bootcamp.authenticationservice.application.jpa.entity;
 
+import bootcamp.authenticationservice.until.EntityConst;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,12 +31,12 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        return List.of(new SimpleGrantedAuthority(EntityConst.Role + role.getName()));
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return getEmail();
     }
 
     @Override

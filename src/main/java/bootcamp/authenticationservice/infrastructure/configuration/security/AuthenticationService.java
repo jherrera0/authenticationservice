@@ -15,6 +15,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
+
 public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
@@ -31,6 +32,13 @@ public class AuthenticationService {
         return new AuthResponse(token);
     }
 
+    public AuthResponse register(@Valid CreateUserRequest createUsreRequest ) {
+        UserEntity user = GeneralMethods.createUser(roleRepository,passwordEncoder,registerRequest,"OTRO");
+        userRepository.save(user);
+
+        String token = jwtService.generateToken(user,generateExtraClaims(user));
+        return new AuthResponse(token);
+    }
 
     private Map<String,Object> generateExtraClaims(UserEntity user) {
         Map<String,Object> extraClaims = new HashMap<>();
