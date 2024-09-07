@@ -3,10 +3,11 @@ package bootcamp.authenticationservice.application.jpa.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 @Data
 @Entity
-public class RoleEntity {
+public class RoleEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,6 +17,6 @@ public class RoleEntity {
     private List<UserEntity> users;
 
     public RoleEntity() {
-
+        // Default constructor empty
     }
 }

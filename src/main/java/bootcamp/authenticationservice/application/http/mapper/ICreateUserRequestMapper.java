@@ -13,5 +13,5 @@ import org.mapstruct.ReportingPolicy;
 
 public interface ICreateUserRequestMapper {
     @Mapping(target = "role",ignore = true)
-    User ToUser(CreateUserRequest createUserRequest);
+    User toUser(CreateUserRequest createUserRequest);
 }

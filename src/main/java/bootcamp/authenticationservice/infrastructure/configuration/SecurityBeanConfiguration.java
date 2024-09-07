@@ -1,7 +1,6 @@
 package bootcamp.authenticationservice.infrastructure.configuration;
 
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
-import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,7 +40,7 @@ public class SecurityBeanConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username);
+        return userRepository::findByEmail;
     }
 }
 

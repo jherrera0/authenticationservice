@@ -15,12 +15,12 @@ public class User {
     public User() {
     }
 
-    public User( String password, String email, String name, String document, String lastName, LocalDate birthDate, String phone, String role) {
-        this.password = password;
-        this.email = email;
+    public User(String name, String lastName, String email, String password, String document, LocalDate birthDate, String phone, String role) {
         this.name = name;
-        this.document = document;
         this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.document = document;
         this.birthDate = birthDate;
         this.phone = phone;
         this.role = role;

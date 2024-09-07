@@ -4,7 +4,6 @@ import bootcamp.authenticationservice.application.http.dto.AuthRequest;
 import bootcamp.authenticationservice.application.http.dto.AuthResponse;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
-import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
 import bootcamp.authenticationservice.until.JwtConst;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

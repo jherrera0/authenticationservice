@@ -5,7 +5,6 @@ import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.mapper.IUserEntityMapper;
 import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
-import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
 import bootcamp.authenticationservice.domain.model.Role;
 import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
