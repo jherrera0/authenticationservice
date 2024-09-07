@@ -5,6 +5,7 @@ import bootcamp.authenticationservice.application.http.dto.AuthResponse;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
 import bootcamp.authenticationservice.domain.exception.UserEmailNotFoundException;
+import bootcamp.authenticationservice.until.JwtConst;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -35,8 +36,8 @@ public class AuthenticationService {
 
     private Map<String,Object> generateExtraClaims(UserEntity user) {
         Map<String,Object> extraClaims = new HashMap<>();
-        extraClaims.put("Id",user.getId());
-        extraClaims.put("Role",user.getRole().getName());
+        extraClaims.put(JwtConst.ID,user.getId());
+        extraClaims.put(JwtConst.ROLE,user.getRole().getName());
         return extraClaims;
     }
 }
