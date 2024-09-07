@@ -1,5 +1,7 @@
 package bootcamp.authenticationservice.domain.api;
 
+import bootcamp.authenticationservice.domain.model.Role;
+
 public interface IRoleServicePort {
-    Long getRoleIdByName(String name);
+    Role getRoleByName(String name);
 }

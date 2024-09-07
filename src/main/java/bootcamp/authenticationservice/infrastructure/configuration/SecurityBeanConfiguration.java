@@ -41,8 +41,7 @@ public class SecurityBeanConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> userRepository.findByEmail(username)
-                .orElseThrow(UserEmailNotFoundException::new);
+        return username -> userRepository.findByEmail(username);
     }
 }
 

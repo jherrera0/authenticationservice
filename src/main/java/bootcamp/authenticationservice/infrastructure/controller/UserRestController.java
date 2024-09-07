@@ -2,14 +2,8 @@ package bootcamp.authenticationservice.infrastructure.controller;
 
 import bootcamp.authenticationservice.application.http.dto.CreateUserRequest;
 import bootcamp.authenticationservice.application.http.handler.UserHandler;
-import bootcamp.authenticationservice.application.http.mapper.ICreateUserRequestMapper;
-import bootcamp.authenticationservice.application.jpa.repository.IRoleRepository;
-import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
-import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.until.ConstantsRestController;
 import bootcamp.authenticationservice.until.DocumentationConst;
-import bootcamp.authenticationservice.until.EntityConst;
-import bootcamp.authenticationservice.until.GeneralMethods;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,7 +12,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,7 +30,7 @@ public class UserRestController {
     @PostMapping(ConstantsRestController.RUTE_CREATE_AUX_WAREHOUSE)
     @PreAuthorize(ConstantsRestController.HAS_ROLE_ADMIN)
     public void createAssWarehouse(@Valid @RequestBody CreateUserRequest createUserRequest) {
-       userHandler.createUser(createUserRequest);
+       userHandler.createUserWarehouse(createUserRequest);
     }
 
 }
