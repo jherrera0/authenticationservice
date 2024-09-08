@@ -1,5 +1,6 @@
 package bootcamp.authenticationservice.until;
 
+import bootcamp.authenticationservice.domain.exception.UserBirthDateEmptyException;
 import bootcamp.authenticationservice.domain.exception.UserIllegalPhoneFormatException;
 import bootcamp.authenticationservice.domain.exception.UserUnderAgeException;
 import bootcamp.authenticationservice.domain.model.User;
@@ -13,6 +14,9 @@ public class ValidateMethods {
         validatePhone(createUserRequest.getPhone());
     }
     private static void validAge(LocalDate birthDate) {
+        if(birthDate == null || birthDate.equals(ExceptionConst.BIRTH_DATE_EMPTY)){
+            throw new UserBirthDateEmptyException();
+        }
         if(birthDate.plusYears(18).isAfter(LocalDate.now())){
             throw new UserUnderAgeException();
         }

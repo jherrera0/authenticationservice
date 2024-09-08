@@ -1,8 +1,10 @@
 package bootcamp.authenticationservice.domain.usecase;
 
 import bootcamp.authenticationservice.domain.api.IRoleServicePort;
+import bootcamp.authenticationservice.domain.exception.RoleEmptyException;
 import bootcamp.authenticationservice.domain.model.Role;
 import bootcamp.authenticationservice.domain.spi.IRolePersistencePort;
+import bootcamp.authenticationservice.until.ExceptionConst;
 
 public class RoleCase implements IRoleServicePort {
     private final IRolePersistencePort rolePersistencePort;
@@ -13,6 +15,9 @@ public class RoleCase implements IRoleServicePort {
 
     @Override
     public Role getRoleByName(String name) {
+        if (name == null || name == ExceptionConst.EMPTY) {
+            throw new RoleEmptyException();
+        }
         return rolePersistencePort.getRoleByName(name);
     }
 }

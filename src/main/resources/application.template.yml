@@ -19,5 +19,5 @@ springdoc:
   api-docs:
     enabled: true
   swagger-ui:
-    path: /category/swagger-ui.html
+    path: /auth/swagger-ui.html
     enabled: true

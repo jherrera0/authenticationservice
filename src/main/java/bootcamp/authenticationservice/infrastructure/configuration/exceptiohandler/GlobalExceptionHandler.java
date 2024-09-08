@@ -19,15 +19,21 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(RoleEmptyException.class)
+    public ResponseEntity<Object> handleRoleEmptyException(RoleEmptyException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UserBirthDateEmptyException.class)
+    public ResponseEntity<Object> handleUserAgeEmptyException(UserBirthDateEmptyException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
     @ExceptionHandler(UserDocumentAlreadyExistsException.class)
     public ResponseEntity<Object> handleUserDocumentAlreadyExistsException(UserDocumentAlreadyExistsException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
 
-    @ExceptionHandler(UserEmailNotFoundException.class)
-    public ResponseEntity<Object> handleUserEmailNotFoundException(UserEmailNotFoundException ex) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
-    }
 
     @ExceptionHandler(UserUnderAgeException.class)
     public ResponseEntity<Object> handleUserUnderAgeException(UserUnderAgeException ex) {
