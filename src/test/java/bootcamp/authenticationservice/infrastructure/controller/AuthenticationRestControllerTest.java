@@ -11,9 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-
-import java.nio.file.AccessDeniedException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -29,6 +26,7 @@ class AuthenticationRestControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
     @Test
     void login_ReturnsOkResponseWithAuthResponse_WhenCredentialsAreValid() {
         AuthRequest authRequest = new AuthRequest("test@example.com", "password123");

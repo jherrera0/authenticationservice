@@ -3,7 +3,6 @@ package bootcamp.authenticationservice.domain.usecase;
 import bootcamp.authenticationservice.domain.exception.RoleEmptyException;
 import bootcamp.authenticationservice.domain.model.Role;
 import bootcamp.authenticationservice.domain.spi.IRolePersistencePort;
-import bootcamp.authenticationservice.until.EntityConst;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

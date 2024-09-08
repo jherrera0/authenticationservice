@@ -15,7 +15,7 @@ public class RoleCase implements IRoleServicePort {
 
     @Override
     public Role getRoleByName(String name) {
-        if (name == null || name == ExceptionConst.EMPTY) {
+        if (name == null || name.equals(ExceptionConst.EMPTY)) {
             throw new RoleEmptyException();
         }
         return rolePersistencePort.getRoleByName(name);
