@@ -24,7 +24,7 @@ class JwtAuthenticationFilterTest {
     private final JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(jwtService, userRepository);
 
     @Test
-    void doFilterInternal_ContinuesFilterChain_WhenAuthorizationHeaderIsNull() throws ServletException, IOException, ServletException, IOException {
+    void doFilterInternal_ContinuesFilterChain_WhenAuthorizationHeaderIsNull() throws ServletException, IOException {
         HttpServletRequest request = mock(HttpServletRequest.class);
         HttpServletResponse response = mock(HttpServletResponse.class);
         FilterChain filterChain = mock(FilterChain.class);

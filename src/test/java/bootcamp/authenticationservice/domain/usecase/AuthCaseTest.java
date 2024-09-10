@@ -45,7 +45,7 @@ class AuthCaseTest {
 
     @Test
     void login_ThrowsBadCredentialsException_WhenPasswordIsNull() {
-        String email = "valid@example.com";;
+        String email = "valid@example.com";
 
         when(authPersistencePort.validateCredentials(email, null)).thenReturn(false);
 
