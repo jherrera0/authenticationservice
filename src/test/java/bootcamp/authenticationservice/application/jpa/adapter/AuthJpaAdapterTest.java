@@ -33,8 +33,6 @@ class AuthJpaAdapterTest {
     @Mock
     private AuthenticationManager authenticationManager;
 
-    @Mock
-    private IUserRepository userRepository;
 
     @BeforeEach
     void setUp() {
