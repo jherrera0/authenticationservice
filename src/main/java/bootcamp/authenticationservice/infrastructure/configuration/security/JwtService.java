@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class JwtService {
 
-    @Value("${app-description}")
+    @Value("${app-security-key}")
     private String secretKey;
     public String generateToken(User user, Map<String, Object> extraClaims) {
         Date issuedAt = new Date(System.currentTimeMillis());
