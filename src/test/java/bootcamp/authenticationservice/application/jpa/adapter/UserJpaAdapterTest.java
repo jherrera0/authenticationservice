@@ -116,4 +116,22 @@ class UserJpaAdapterTest {
         assertThrows(NullPointerException.class, () -> userJpaAdapter.createUserWarehouse(null, null));
         verify(userRepository, never()).save(any(UserEntity.class));
     }
+    @Test
+    void getUserEntityByEmail_ReturnsUserEntity_WhenEmailExists() {
+        UserEntity userEntity = new UserEntity();
+        when(userRepository.findByEmail(TestConsts.USER_VALID_EMAIL)).thenReturn(userEntity);
+
+        UserEntity result = userJpaAdapter.getUserEntityByEmail(TestConsts.USER_VALID_EMAIL);
+
+        assertEquals(userEntity, result);
+    }
+
+    @Test
+    void getUserEntityByEmail_ReturnsNull_WhenEmailDoesNotExist() {
+        when(userRepository.findByEmail(TestConsts.USER_VALID_EMAIL_INVALID)).thenReturn(null);
+
+        UserEntity result = userJpaAdapter.getUserEntityByEmail(TestConsts.USER_VALID_EMAIL_INVALID);
+
+        assertNull(result);
+    }
 }

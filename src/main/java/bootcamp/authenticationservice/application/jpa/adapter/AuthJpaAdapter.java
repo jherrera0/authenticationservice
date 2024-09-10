@@ -1,7 +1,6 @@
 package bootcamp.authenticationservice.application.jpa.adapter;
 
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
-import bootcamp.authenticationservice.application.jpa.mapper.IUserEntityMapper;
 import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IAuthPersistencePort;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
@@ -9,6 +8,7 @@ import bootcamp.authenticationservice.infrastructure.configuration.security.JwtS
 import bootcamp.authenticationservice.until.JwtConst;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
@@ -44,19 +44,23 @@ public class AuthJpaAdapter implements IAuthPersistencePort {
 
     @Override
     public String generateToken(User user) {
+        if (user == null) {
+            return null;
+        }
         return jwtService.generateToken(user, generateExtraClaims(user));
     }
 
     @Override
     public boolean validateCredentials(String userEmail, String userPassword) {
-        if(authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        userEmail,
-                        userPassword
-                )
-        ).isAuthenticated()){
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            userEmail,
+                            userPassword
+                    )
+            );
             return true;
-        }else{
+        } catch (BadCredentialsException e) {
             return false;
         }
     }
