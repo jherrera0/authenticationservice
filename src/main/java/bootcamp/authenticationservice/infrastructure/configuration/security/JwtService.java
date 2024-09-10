@@ -1,7 +1,6 @@
 package bootcamp.authenticationservice.infrastructure.configuration.security;
 
-
-import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
+import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.until.JwtConst;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
@@ -21,7 +20,7 @@ public class JwtService {
 
     @Value("${app-description}")
     private String secretKey;
-    public String generateToken(UserEntity user, Map<String, Object> extraClaims) {
+    public String generateToken(User user, Map<String, Object> extraClaims) {
         Date issuedAt = new Date(System.currentTimeMillis());
         Date expiration = new Date(issuedAt.getTime() + JwtConst.EXPIRATION_TIME);
         return Jwts.builder()
