@@ -1,6 +1,7 @@
 package bootcamp.authenticationservice.infrastructure.configuration;
 
 import bootcamp.authenticationservice.application.jpa.adapter.AuthJpaAdapter;
+import bootcamp.authenticationservice.application.jpa.adapter.EncoderJpaAdapter;
 import bootcamp.authenticationservice.application.jpa.adapter.RoleJpaAdapter;
 import bootcamp.authenticationservice.application.jpa.adapter.UserJpaAdapter;
 import bootcamp.authenticationservice.application.jpa.mapper.IRoleEntityMapper;
@@ -11,6 +12,7 @@ import bootcamp.authenticationservice.domain.api.IAuthServicePort;
 import bootcamp.authenticationservice.domain.api.IRoleServicePort;
 import bootcamp.authenticationservice.domain.api.IUserServicePort;
 import bootcamp.authenticationservice.domain.spi.IAuthPersistencePort;
+import bootcamp.authenticationservice.domain.spi.IEncoderPersistencePort;
 import bootcamp.authenticationservice.domain.spi.IRolePersistencePort;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
 import bootcamp.authenticationservice.domain.usecase.AuthCase;
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
@@ -31,6 +34,7 @@ public class BeanConfiguration {
     private final IRoleEntityMapper roleEntityMapper;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     @Bean
     public IUserPersistencePort userPersistencePort(){
@@ -43,8 +47,13 @@ public class BeanConfiguration {
     }
 
     @Bean
+    public IEncoderPersistencePort encoderPersistencePort(){
+        return new EncoderJpaAdapter(passwordEncoder);
+    }
+
+    @Bean
     public IUserServicePort userServicePort(){
-        return new UserCase(userPersistencePort(), rolePersistencePort());
+        return new UserCase(userPersistencePort(), rolePersistencePort(), encoderPersistencePort());
     }
 
     @Bean

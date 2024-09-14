@@ -1,6 +1,7 @@
 package bootcamp.authenticationservice.until;
 
 public class ConstantsRestController {
+    public static final String PERMIT_ALL = "permitAll()";
     public static final String HAS_ROLE_ADMIN = "hasRole('ADMIN')";
     public static final String RUTE_USER = "/user";
     public static final String RUTE_CREATE_AUX_WAREHOUSE = "/createAssWarehouse";

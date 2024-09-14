@@ -1,11 +1,10 @@
 package bootcamp.authenticationservice.infrastructure.configuration.security;
 
+import bootcamp.authenticationservice.domain.exception.MalformJwtException;
 import bootcamp.authenticationservice.domain.model.User;
+import bootcamp.authenticationservice.until.ExceptionConst;
 import bootcamp.authenticationservice.until.JwtConst;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Header;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import java.util.Map;
 @Service
 
 public class JwtService {
-
     @Value("${app-security-key}")
     private String secretKey;
     public String generateToken(User user, Map<String, Object> extraClaims) {
@@ -37,11 +35,20 @@ public class JwtService {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
+
     public String extractUsername(String jwt) {
-       return extractAllClaims(jwt).getSubject();
+        try {
+            return extractAllClaims(jwt).getSubject();
+        } catch (MalformedJwtException e) {
+            throw new MalformJwtException(ExceptionConst.INVALID_JWT);
+        }
     }
 
     public Claims extractAllClaims(String jwt) {
-        return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
+        try {
+            return Jwts.parserBuilder().setSigningKey(generateKey()).build().parseClaimsJws(jwt).getBody();
+        } catch (MalformedJwtException e) {
+            throw new MalformJwtException(ExceptionConst.INVALID_JWT);
+        }
     }
 }

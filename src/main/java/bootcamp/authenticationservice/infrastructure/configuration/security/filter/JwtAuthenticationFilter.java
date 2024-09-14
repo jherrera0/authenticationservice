@@ -2,6 +2,7 @@ package bootcamp.authenticationservice.infrastructure.configuration.security.fil
 
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
 import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
+import bootcamp.authenticationservice.domain.exception.MalformJwtException;
 import bootcamp.authenticationservice.infrastructure.configuration.security.JwtService;
 import bootcamp.authenticationservice.until.JwtConst;
 import jakarta.servlet.FilterChain;
@@ -22,18 +23,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     private final IUserRepository userRepository;
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-    String authorizationHeader = request.getHeader(JwtConst.HEADER_STRING);
-    if(authorizationHeader == null || !authorizationHeader.startsWith(JwtConst.BEARER)){
-        filterChain.doFilter(request,response);
-        return;
-    }
-    String jwt = authorizationHeader.split(JwtConst.SPLITERSTRING)[1];
-    String username = jwtService.extractUsername(jwt);
-    UserEntity user = userRepository.findByEmail(username);
-    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,null,user.getAuthorities());
-    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
-    filterChain.doFilter(request,response);
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException, MalformJwtException {
+        String authorizationHeader = request.getHeader(JwtConst.HEADER_STRING);
+        if (authorizationHeader == null || !authorizationHeader.startsWith(JwtConst.BEARER)) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+        try {
+            String jwt = authorizationHeader.split(JwtConst.SPLITERSTRING)[1];
+            String username = jwtService.extractUsername(jwt);
+            UserEntity user = userRepository.findByEmail(username);
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, null, user.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        } catch (MalformJwtException e) {
+            SecurityContextHolder.clearContext();
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+            return;
+        }
+        filterChain.doFilter(request, response);
     }
 }

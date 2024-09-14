@@ -31,7 +31,7 @@ public class AuthenticationRestController {
             @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_201, description = DocumentationConst.DESCRIPTION_STATUS_201_AUTH, content = @Content),
             @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_403, description = DocumentationConst.DESCRIPTION_STATUS_403_AUTH, content = @Content)
     })
-    @PreAuthorize("permitAll()")
+    @PreAuthorize(ConstantsRestController.PERMIT_ALL)
     @PostMapping(ConstantsRestController.RUTE_LOGIN)
     public ResponseEntity<AuthResponse> login(@RequestBody @Valid AuthRequest authRequest) {
         AuthResponse authResponse = authResponseMapper.toAuthResponse(authHandler.login(authRequest.getUsername(), authRequest.getPassword()));
