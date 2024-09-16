@@ -87,5 +87,59 @@ class UserTest {
 
         assertEquals(TestConsts.USER_VALID_ROLE, user.getRole());
     }
+    @Test
+    void userConstructor_SetsAllFieldsCorrectlyWithId() {
+        LocalDate birthDate = LocalDate.parse(TestConsts.USER_VALID_BIRTH_DATE);
+        User user = new User(1L, TestConsts.USER_VALID_NAME, TestConsts.USER_VALID_LAST_NAME, TestConsts.USER_VALID_EMAIL, TestConsts.USER_VALID_PASSWORD, TestConsts.USER_VALID_DOCUMENT, birthDate, TestConsts.USER_VALID_PHONE, TestConsts.USER_VALID_ROLE);
 
+        assertEquals(1L, user.getId());
+        assertEquals(TestConsts.USER_VALID_NAME, user.getName());
+        assertEquals(TestConsts.USER_VALID_LAST_NAME, user.getLastName());
+        assertEquals(TestConsts.USER_VALID_EMAIL, user.getEmail());
+        assertEquals(TestConsts.USER_VALID_PASSWORD, user.getPassword());
+        assertEquals(TestConsts.USER_VALID_DOCUMENT, user.getDocument());
+        assertEquals(birthDate, user.getBirthDate());
+        assertEquals(TestConsts.USER_VALID_PHONE, user.getPhone());
+        assertEquals(TestConsts.USER_VALID_ROLE, user.getRole());
+    }
+
+    @Test
+    void setId_UpdatesIdCorrectly() {
+        User user = new User();
+        user.setId(1L);
+
+        assertEquals(1L, user.getId());
+    }
+
+    @Test
+    void setName_UpdatesNameToNull() {
+        User user = new User();
+        user.setName(null);
+
+        assertNull(user.getName());
+    }
+
+    @Test
+    void setEmail_UpdatesEmailToEmpty() {
+        User user = new User();
+        user.setEmail("");
+
+        assertEquals("", user.getEmail());
+    }
+
+    @Test
+    void setBirthDate_UpdatesBirthDateToNull() {
+        User user = new User();
+        user.setBirthDate(null);
+
+        assertNull(user.getBirthDate());
+    }
+
+    @Test
+    void setRole_UpdatesRoleToNull() {
+        User user = new User();
+        user.setRole(null);
+
+        assertNull(user.getRole());
+    }
 }

@@ -3,6 +3,7 @@ package bootcamp.authenticationservice.domain.model;
 import java.time.LocalDate;
 
 public class User {
+    private Long id;
     private String password;
     private String email;
     private String name;
@@ -24,6 +25,27 @@ public class User {
         this.birthDate = birthDate;
         this.phone = phone;
         this.role = role;
+    }
+
+
+    public User(Long id, String name, String lastName, String email, String password, String document, LocalDate birthDate, String phone, String role) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.document = document;
+        this.birthDate = birthDate;
+        this.phone = phone;
+        this.role = role;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDocument() {

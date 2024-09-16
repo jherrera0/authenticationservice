@@ -19,6 +19,11 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(MalformJwtException.class)
+    public ResponseEntity<Object> handleMalformJwtException(MalformJwtException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
+
     @ExceptionHandler(RoleEmptyException.class)
     public ResponseEntity<Object> handleRoleEmptyException(RoleEmptyException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
@@ -49,7 +54,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleUserEmailAlreadyExistException(UserEmailAlreadyExistException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
     }
-    @ExceptionHandler(BadCredentialsException.class)
+    @ExceptionHandler(BadCredentialException.class)
     public ResponseEntity<Object> handleBadCredentialsException(BadCredentialsException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
