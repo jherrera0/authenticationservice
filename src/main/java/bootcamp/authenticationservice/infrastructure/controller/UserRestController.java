@@ -33,5 +33,11 @@ public class UserRestController {
        userHandler.createUserWarehouse(createUserRequest);
     }
 
+    @PreAuthorize(ConstantsRestController.PERMIT_ALL)
+    @PostMapping(ConstantsRestController.RUTE_REGISTER_CUSTOMER)
+    public void  registerCustomer(@Valid @RequestBody CreateUserRequest registerRequest) {
+       userHandler.registerCustomer(registerRequest);
+    }
+
 }
 

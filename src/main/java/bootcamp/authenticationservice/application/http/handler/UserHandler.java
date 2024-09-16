@@ -22,4 +22,11 @@ public class UserHandler implements IUserHandler {
         user.setRole(EntityConst.WAREHOUSE_ROLE);
         userServicePort.createUser(user);
     }
+
+    @Override
+    public void registerCustomer(CreateUserRequest request) {
+        User user = createUserRequestMapper.toUser(request);
+        user.setRole(EntityConst.USER_ROLE);
+        userServicePort.createUser(user);
+    }
 }

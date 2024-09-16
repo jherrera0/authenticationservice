@@ -27,7 +27,7 @@ public class UserCase implements IUserServicePort {
        if(userPersistencePort.getUserByDocument(user.getDocument()) != null){
            throw new UserDocumentAlreadyExistsException();
        }
-       if(userPersistencePort.getUserByEmail(user.getEmail())!= null){
+       else if(userPersistencePort.getUserByEmail(user.getEmail())!= null){
            throw new UserEmailAlreadyExistException();
        }
        ValidateMethods.validateUser(user);
