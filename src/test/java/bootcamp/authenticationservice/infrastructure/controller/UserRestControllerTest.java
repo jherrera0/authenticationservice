@@ -33,5 +33,13 @@ class UserRestControllerTest {
         verify(userHandler).createUserWarehouse(createUserRequest);
     }
 
+    @Test
+    void registerCustomer_CreatesCustomer_WhenRequestIsValid() {
+        CreateUserRequest registerRequest = new CreateUserRequest(TestConsts.USER_VALID_NAME, TestConsts.USER_VALID_LAST_NAME, TestConsts.USER_VALID_PASSWORD, TestConsts.USER_VALID_DOCUMENT, TestConsts.USER_VALID_PHONE, TestConsts.USER_VALID_EMAIL, LocalDate.parse(TestConsts.USER_VALID_BIRTH_DATE));
+        userRestController.registerCustomer(registerRequest);
+
+        verify(userHandler).registerCustomer(registerRequest);
+    }
+
 
 }

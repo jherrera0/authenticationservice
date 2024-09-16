@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class JwtService {
     @Value("${app-security-key}")
-    private String secretKey;
+    private String secretKey = "mySecretKeymysecretkeymySecretKeymysecretkeymySecretKey";
     public String generateToken(User user, Map<String, Object> extraClaims) {
         Date issuedAt = new Date(System.currentTimeMillis());
         Date expiration = new Date(issuedAt.getTime() + JwtConst.EXPIRATION_TIME);

@@ -23,7 +23,7 @@ public class UserCase implements IUserServicePort {
 
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user, String roleName) {
        if(userPersistencePort.getUserByDocument(user.getDocument()) != null){
            throw new UserDocumentAlreadyExistsException();
        }
@@ -32,7 +32,7 @@ public class UserCase implements IUserServicePort {
        }
        ValidateMethods.validateUser(user);
        user.setPassword(encoderPersistencePort.encoder(user.getPassword()));
-       Role role = rolePersistencePort.getRoleByName(user.getRole());
+       Role role = rolePersistencePort.getRoleByName(roleName);
        userPersistencePort.createUserWarehouse(user,role);
     }
 }

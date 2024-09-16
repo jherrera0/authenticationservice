@@ -4,6 +4,7 @@ import bootcamp.authenticationservice.domain.exception.UserDocumentAlreadyExists
 import bootcamp.authenticationservice.domain.exception.UserEmailAlreadyExistException;
 import bootcamp.authenticationservice.domain.model.Role;
 import bootcamp.authenticationservice.domain.model.User;
+import bootcamp.authenticationservice.domain.spi.IEncoderPersistencePort;
 import bootcamp.authenticationservice.domain.spi.IRolePersistencePort;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
 import bootcamp.authenticationservice.until.TestConsts;
@@ -20,13 +21,15 @@ class UserCaseTest {
 
     private IUserPersistencePort userPersistencePort;
     private IRolePersistencePort rolePersistencePort;
+    private IEncoderPersistencePort encoderPersistencePort;
     private UserCase userCase;
 
     @BeforeEach
     void setUp() {
         userPersistencePort = mock(IUserPersistencePort.class);
         rolePersistencePort = mock(IRolePersistencePort.class);
-        userCase = new UserCase(userPersistencePort, rolePersistencePort);
+        encoderPersistencePort = mock(IEncoderPersistencePort.class);
+        userCase = new UserCase(userPersistencePort, rolePersistencePort, encoderPersistencePort);
     }
 
     @Test

@@ -25,7 +25,9 @@ public class UserRestController {
     @Operation(summary = DocumentationConst.USER_CONTROLLER_CREATE_WAREHOUSE_DESCRIPTION)
     @ApiResponses(value = {
             @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_201, description = DocumentationConst.DESCRIPTION_STATUS_201_USER, content = @Content),
-            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_403, description = DocumentationConst.DESCRIPTION_STATUS_403_USER, content = @Content)
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_401, description = DocumentationConst.DESCRIPTION_STATUS_401_USER, content = @Content),
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_403, description = DocumentationConst.DESCRIPTION_STATUS_403_USER, content = @Content),
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_400, description = DocumentationConst.DESCRIPTION_STATUS_400_USER, content = @Content)
     })
     @PostMapping(ConstantsRestController.RUTE_CREATE_AUX_WAREHOUSE)
     @PreAuthorize(ConstantsRestController.HAS_ROLE_ADMIN)
@@ -33,6 +35,13 @@ public class UserRestController {
        userHandler.createUserWarehouse(createUserRequest);
     }
 
+    @Operation(summary = DocumentationConst.USER_CONTROLLER_CREATE_CUSTOMER_DESCRIPTION)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_201, description = DocumentationConst.DESCRIPTION_STATUS_201_USER, content = @Content),
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_401, description = DocumentationConst.DESCRIPTION_STATUS_401_USER, content = @Content),
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_403, description = DocumentationConst.DESCRIPTION_STATUS_403_USER, content = @Content),
+            @ApiResponse(responseCode = DocumentationConst.CODE_STATUS_400, description = DocumentationConst.DESCRIPTION_STATUS_400_USER, content = @Content)
+    })
     @PreAuthorize(ConstantsRestController.PERMIT_ALL)
     @PostMapping(ConstantsRestController.RUTE_REGISTER_CUSTOMER)
     public void  registerCustomer(@Valid @RequestBody CreateUserRequest registerRequest) {
