@@ -2,7 +2,6 @@ package bootcamp.authenticationservice.application.jpa.adapter;
 
 import bootcamp.authenticationservice.application.jpa.entity.RoleEntity;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
-import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
 import bootcamp.authenticationservice.domain.exception.MalformJwtException;
 import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
@@ -13,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

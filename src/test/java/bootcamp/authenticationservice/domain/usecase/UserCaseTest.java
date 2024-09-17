@@ -7,6 +7,7 @@ import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IEncoderPersistencePort;
 import bootcamp.authenticationservice.domain.spi.IRolePersistencePort;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
+import bootcamp.authenticationservice.until.EntityConst;
 import bootcamp.authenticationservice.until.TestConsts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ class UserCaseTest {
 
         when(userPersistencePort.getUserByDocument(user.getDocument())).thenReturn(user);
 
-        assertThrows(UserDocumentAlreadyExistsException.class, () -> userCase.createUser(user));
+        assertThrows(UserDocumentAlreadyExistsException.class, () -> userCase.createUser(user, EntityConst.USER_ROLE));
     }
 
     @Test
@@ -49,7 +50,7 @@ class UserCaseTest {
 
         when(userPersistencePort.getUserByEmail(user.getEmail())).thenReturn(user);
 
-        assertThrows(UserEmailAlreadyExistException.class, () -> userCase.createUser(user));
+        assertThrows(UserEmailAlreadyExistException.class, () -> userCase.createUser(user,EntityConst.USER_ROLE));
     }
 
 
