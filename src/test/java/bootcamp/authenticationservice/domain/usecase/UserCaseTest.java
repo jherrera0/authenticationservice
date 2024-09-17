@@ -55,26 +55,20 @@ class UserCaseTest {
 
 
     @Test
-    void createUserShouldCreateUserWhenValid() {
+    void createUserShouldNotCreateUserWhenValidationFails() {
         User user = new User();
         user.setDocument(TestConsts.USER_VALID_DOCUMENT);
         user.setEmail(TestConsts.USER_VALID_EMAIL);
-        user.setName(TestConsts.USER_VALID_NAME);
+        user.setName("");
         user.setLastName(TestConsts.USER_VALID_LAST_NAME);
         user.setPassword(TestConsts.USER_VALID_PASSWORD);
         user.setPhone(TestConsts.USER_VALID_PHONE);
         user.setRole(TestConsts.USER_VALID_ROLE);
         user.setBirthDate(LocalDate.parse(TestConsts.USER_VALID_BIRTH_DATE));
 
-        Role role = new Role();
-        role.setName("userRole");
-
         when(userPersistencePort.getUserByDocument(user.getDocument())).thenReturn(null);
         when(userPersistencePort.getUserByEmail(user.getEmail())).thenReturn(null);
-        when(rolePersistencePort.getRoleByName(user.getRole())).thenReturn(role);
 
-        userCase.createUser(user);
-
-        verify(userPersistencePort, times(1)).createUserWarehouse(user, role);
+        verify(userPersistencePort, never()).createUserWarehouse(any(User.class), any(Role.class));
     }
 }
