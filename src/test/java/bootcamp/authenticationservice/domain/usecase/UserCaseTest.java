@@ -71,4 +71,28 @@ class UserCaseTest {
 
         verify(userPersistencePort, never()).createUserWarehouse(any(User.class), any(Role.class));
     }
+
+    @Test
+    void createUserCreatesUserWhenDataIsValid() {
+        User user = new User();
+        user.setDocument(TestConsts.USER_VALID_DOCUMENT);
+        user.setEmail(TestConsts.USER_VALID_EMAIL);
+        user.setName(TestConsts.USER_VALID_NAME);
+        user.setLastName(TestConsts.USER_VALID_LAST_NAME);
+        user.setPassword(TestConsts.USER_VALID_PASSWORD);
+        user.setPhone(TestConsts.USER_VALID_PHONE);
+        user.setRole(TestConsts.USER_VALID_ROLE);
+        user.setBirthDate(LocalDate.parse(TestConsts.USER_VALID_BIRTH_DATE));
+
+        when(userPersistencePort.getUserByDocument(user.getDocument())).thenReturn(null);
+        when(userPersistencePort.getUserByEmail(user.getEmail())).thenReturn(null);
+        when(encoderPersistencePort.encoder(user.getPassword())).thenReturn("encodedPassword");
+        Role role = new Role();
+        when(rolePersistencePort.getRoleByName(EntityConst.USER_ROLE)).thenReturn(role);
+
+        userCase.createUser(user, EntityConst.USER_ROLE);
+
+        verify(userPersistencePort).createUserWarehouse(user, role);
+    }
+
 }
