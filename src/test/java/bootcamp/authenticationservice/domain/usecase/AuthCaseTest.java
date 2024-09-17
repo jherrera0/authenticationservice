@@ -1,5 +1,6 @@
 package bootcamp.authenticationservice.domain.usecase;
 
+import bootcamp.authenticationservice.domain.exception.BadCredentialException;
 import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IAuthPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,7 +32,7 @@ class AuthCaseTest {
 
         when(authPersistencePort.validateCredentials(email, password)).thenReturn(false);
 
-        assertThrows(BadCredentialsException.class, () -> authCase.login(email, password));
+        assertThrows(BadCredentialException.class, () -> authCase.login(email, password));
     }
 
     @Test
@@ -40,7 +41,7 @@ class AuthCaseTest {
 
         when(authPersistencePort.validateCredentials(null, password)).thenReturn(false);
 
-        assertThrows(BadCredentialsException.class, () -> authCase.login(null, password));
+        assertThrows(BadCredentialException.class, () -> authCase.login(null, password));
     }
 
     @Test
@@ -49,7 +50,7 @@ class AuthCaseTest {
 
         when(authPersistencePort.validateCredentials(email, null)).thenReturn(false);
 
-        assertThrows(BadCredentialsException.class, () -> authCase.login(email, null));
+        assertThrows(BadCredentialException.class, () -> authCase.login(email, null));
     }
     @Test
     void login_ReturnsToken_WhenCredentialsAreValid() {

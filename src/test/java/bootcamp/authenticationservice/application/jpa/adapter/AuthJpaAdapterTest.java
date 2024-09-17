@@ -2,10 +2,12 @@ package bootcamp.authenticationservice.application.jpa.adapter;
 
 import bootcamp.authenticationservice.application.jpa.entity.RoleEntity;
 import bootcamp.authenticationservice.application.jpa.entity.UserEntity;
-import bootcamp.authenticationservice.application.jpa.repository.IUserRepository;
+import bootcamp.authenticationservice.domain.exception.MalformJwtException;
 import bootcamp.authenticationservice.domain.model.User;
 import bootcamp.authenticationservice.domain.spi.IUserPersistencePort;
+import bootcamp.authenticationservice.infrastructure.configuration.exceptiohandler.GlobalExceptionHandler;
 import bootcamp.authenticationservice.infrastructure.configuration.security.JwtService;
+import io.jsonwebtoken.Claims;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -32,6 +34,9 @@ class AuthJpaAdapterTest {
 
     @Mock
     private AuthenticationManager authenticationManager;
+
+    @Mock
+    private GlobalExceptionHandler globalExceptionHandler;
 
 
     @BeforeEach
@@ -106,5 +111,24 @@ class AuthJpaAdapterTest {
         assertFalse(isValid);
     }
 
+    @Test
+    void extractAllClaims_ReturnsClaims_WhenJwtIsValid() {
+        String validJwt = "valid.jwt.token";
+        Claims claims = mock(Claims.class);
+        when(jwtService.extractAllClaims(validJwt)).thenReturn(claims);
+
+        Claims result = jwtService.extractAllClaims(validJwt);
+
+        assertNotNull(result);
+        assertEquals(claims, result);
+    }
+
+    @Test
+    void extractAllClaims_ThrowsMalformJwtException_WhenJwtIsInvalid() {
+        String invalidJwt = "invalid.jwt.token";
+        when(jwtService.extractAllClaims(invalidJwt)).thenThrow(new MalformJwtException("Invalid JWT"));
+
+        assertThrows(MalformJwtException.class, () -> jwtService.extractAllClaims(invalidJwt));
+    }
 
 }

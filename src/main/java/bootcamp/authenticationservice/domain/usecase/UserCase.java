@@ -23,16 +23,16 @@ public class UserCase implements IUserServicePort {
 
 
     @Override
-    public void createUser(User user) {
+    public void createUser(User user, String roleName) {
        if(userPersistencePort.getUserByDocument(user.getDocument()) != null){
            throw new UserDocumentAlreadyExistsException();
        }
-       if(userPersistencePort.getUserByEmail(user.getEmail())!= null){
+       else if(userPersistencePort.getUserByEmail(user.getEmail())!= null){
            throw new UserEmailAlreadyExistException();
        }
        ValidateMethods.validateUser(user);
        user.setPassword(encoderPersistencePort.encoder(user.getPassword()));
-       Role role = rolePersistencePort.getRoleByName(user.getRole());
+       Role role = rolePersistencePort.getRoleByName(roleName);
        userPersistencePort.createUserWarehouse(user,role);
     }
 }
